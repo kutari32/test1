@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>あなたへのメッセージ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sawarabi+Gothic&display=swap" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff9f9; /* 目に優しい薄いピンクベージュ */
+            font-family: 'Sawarabi Gothic', sans-serif;
+            overflow: hidden;
+            cursor: pointer; /* クリックできることを示唆 */
+        }
+
+        /* メッセージのスタイル */
+        #message-container {
+            text-align: center;
+            transition: opacity 0.8s ease;
+        }
+
+        h1 {
+            color: #8d6e63;
+            font-size: 1.5rem;
+            font-weight: normal;
+            letter-spacing: 0.1rem;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        /* 画像のスタイル（最初は非表示） */
+        #image-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none; /* 初期状態 */
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        img {
+            max-width: 80%;
+            max-height: 80%;
+            border-radius: 20px; /* 角を丸くして柔らかく */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* ふわっと表示させるアニメーション */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="message-container">
+        <h1>あなたへのメッセージがあるんやで</h1>
+        <p style="color: #bcaaa4; font-size: 0.9rem;">(画面をタップしてください)</p>
+    </div>
+
+    <div id="image-container">
+        <img src="https://images.unsplash.com/photo-1490730141103-6cac27aaab94?auto=format&fit=crop&q=80&w=1000" alt="サプライズ画像">
+    </div>
+
+    <script>
+        const body = document.body;
+        const messageContainer = document.getElementById('message-container');
+        const imageContainer = document.getElementById('image-container');
+
+        // 画面全体へのクリック/タップイベント
+        body.addEventListener('click', () => {
+            // メッセージを消す
+            messageContainer.style.opacity = '0';
+            
+            setTimeout(() => {
+                messageContainer.style.display = 'none';
+                
+                // 画像を表示する
+                imageContainer.style.display = 'flex';
+                // 微小な遅延を入れることでフェードアニメーションを適用させる
+                setTimeout(() => {
+                    imageContainer.style.opacity = '1';
+                }, 50);
+            }, 800);
+        }, { once: true }); // イベントは1回だけ実行
+    </script>
+</body>
+</html>
